@@ -27,6 +27,6 @@ public class MainActivity extends AppCompatActivity {
     @OnClick({R.id.tvTest,R.id.ivTest})
     @CheckNet//没有网络就执行该方法，而是直接打印没有网络的Toast
     private void onClick(){
-        Toast.makeText(this, "dianji", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "dianji", Toast.LENGTH_LONG).show();
     }
 }
