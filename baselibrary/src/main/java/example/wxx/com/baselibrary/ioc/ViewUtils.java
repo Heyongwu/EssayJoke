@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import java.lang.reflect.Method;
  */
 
 public class ViewUtils {
+    private static final String TAG = "ViewUtils";
+
     //目前
     public static void inject(Activity activity) {
         inject(new ViewFinder(activity), activity);
@@ -146,6 +149,7 @@ public class ViewUtils {
                     mMethod.invoke(mObject, null);
                 } catch (Exception e1) {
                     e1.printStackTrace();
+                    Log.e(TAG, "onClick: ",e );
                 }
             }
         }
