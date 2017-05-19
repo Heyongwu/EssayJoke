@@ -7,7 +7,8 @@ import android.content.pm.PackageManager;
 
 import com.alipay.euler.andfix.patch.PatchManager;
 
-import example.wxx.com.baselibrary.ExceptionCrashHandler;
+import example.wxx.com.baselibrary.exception.ExceptionCrashHandler;
+import example.wxx.com.baselibrary.fixbug.FixDexManager;
 
 /**
  * 作者：wengxingxia
@@ -27,7 +28,27 @@ public class BaseApplication extends Application {
         mContext = this.getApplicationContext();
 //      设置全局异常捕捉类
         ExceptionCrashHandler.getmInstance().init(this);
-//      初始化阿里的热修复
+//        initAliFix();//初始化阿里热修复
+
+//        initFixManager();//初始化自己定义的热修复
+
+    }
+
+    private void initFixManager() {
+        try {
+            FixDexManager fixDexManager = new FixDexManager(this);
+//        加载所有修复的dex包
+            fixDexManager.loadFixDex();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 初始化阿里热修复
+     */
+    private void initAliFix() {
+        //      初始化阿里的热修复
         mPatchManager = new PatchManager(mContext);
 
 

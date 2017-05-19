@@ -1,4 +1,4 @@
-package example.wxx.com.essayjoke;
+package example.wxx.com.essayjoke.customview;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -21,8 +21,7 @@ public class ImplantListView extends ListView {
     }
 
     public ImplantListView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+        super(context, attrs, defStyleAttr);    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
