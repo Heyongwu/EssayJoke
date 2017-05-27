@@ -20,8 +20,12 @@ import java.io.InputStreamReader;
 import example.wxx.com.baselibrary.dialog.AlertDialog;
 import example.wxx.com.baselibrary.exception.ExceptionCrashHandler;
 import example.wxx.com.baselibrary.fixbug.FixDexManager;
+import example.wxx.com.baselibrary.http.HttpUtils;
 import example.wxx.com.baselibrary.ioc.ViewById;
+import example.wxx.com.essayjoke.model.DiscoverListResult;
 import example.wxx.com.framelibrary.BaseSkinActivity;
+import example.wxx.com.framelibrary.DefaultNavigationBar;
+import example.wxx.com.framelibrary.http.HttpCallback;
 
 public class MainActivity extends BaseSkinActivity implements View.OnClickListener {
     public static final int PERMISSION = 1;
@@ -47,7 +51,16 @@ public class MainActivity extends BaseSkinActivity implements View.OnClickListen
 
     @Override
     protected void initTitle() {
-
+        new DefaultNavigationBar.Builder(this)
+                .setTitle("自定义Navigation")
+                .setRightText("发布")
+                .setLeftIcon(R.drawable.btn_back)
+                .setRightClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this, "5555", Toast.LENGTH_SHORT).show();
+                    }
+                }).builder();
     }
 
     @Override
@@ -57,12 +70,80 @@ public class MainActivity extends BaseSkinActivity implements View.OnClickListen
 
     @Override
     protected void initData() {
+// 路径和参数是不能让别人反编译的，NDK -> .so  1.列表保存第一次，2.有些是保存最后所有
+        HttpUtils.with(this).url("http://is.snssdk.com/2/essay/discovery/v3/")
+                .cache(true)
+                .addParam("iid", "6152551759")
+                .addParam("aid", "7")
+                .execute(new HttpCallback<DiscoverListResult>() {
+                    @Override
+                    public void onSuccess(DiscoverListResult result) {
+
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
+
+//        1、为什么要用Factory  目前的数据是在 内存卡中，有时候我们需要放到 data/data/xxxxx/databases中
+//           获取的Factory不一样 那么写入的位置 是可以不一样的
+//        2、为什么要用接口，
+//           面向接口编程 获取IDaoSupport 那么不需要关心实现 目前的实现是自己写的，方便以后使用第三方的
+
+//        3、就是为了高扩展
+
+        /*IDaoSupport<Person> daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
+//        daoSupport.insert(new Person("Xander",23));
+
+        daoSupport.delete(null,null);
+        List<Person> persons = new ArrayList<>();
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 10; i++) {
+            persons.add(new Person("Xander",23+i));
+        }
+
+        daoSupport.insertList(persons);
+        long end = System.currentTimeMillis();
+
+        Log.e(TAG, "time-->" + (end - start));
+        List<Person> personList = daoSupport.querySupport().columns("age").selection("age>?").selectionArgs("26").query();
+        for (Person person : personList) {
+            Log.e(TAG, person.toString());
+        }*/
 //        upLoadCrashLog();//
 
 
 //        aliFixBug(); //阿里热修复
 
 //        fixDexBug();//自己定义的热修复
+
+//        HttpUtils.with(this).url("http://is.snssdk.com/2/essay/discovery/v3/")// 路径 apk  参数都需要放到jni
+//                .addParams("iid", "6152551759")
+//                .exchangeEngine(new OkHttpEngine())  // 切换引擎
+//                .addParams("aid", "7").execute(new HttpCallback<DiscoverListResult>() {
+//            @Override
+//            public void onPreExecute() {
+//                super.onPreExecute();
+////                加载进度条
+//            }
+//
+//            @Override
+//            public void onError(Exception e) {
+////              取消进度条
+//            }
+//
+//            @Override
+//            public void onSuccess(final DiscoverListResult result) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Toast.makeText(MainActivity.this, result.getData().getCategories().getName(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        });
 
 
     }

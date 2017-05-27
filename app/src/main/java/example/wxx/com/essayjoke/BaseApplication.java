@@ -9,6 +9,8 @@ import com.alipay.euler.andfix.patch.PatchManager;
 
 import example.wxx.com.baselibrary.exception.ExceptionCrashHandler;
 import example.wxx.com.baselibrary.fixbug.FixDexManager;
+import example.wxx.com.baselibrary.http.HttpUtils;
+import example.wxx.com.framelibrary.http.OkHttpEngine;
 
 /**
  * 作者：wengxingxia
@@ -25,6 +27,7 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        HttpUtils.init(new OkHttpEngine());
         mContext = this.getApplicationContext();
 //      设置全局异常捕捉类
         ExceptionCrashHandler.getmInstance().init(this);
@@ -34,8 +37,12 @@ public class BaseApplication extends Application {
 
     }
 
+    /**
+     * 初始化自己定义的热修复
+     */
     private void initFixManager() {
         try {
+//            很耗时
             FixDexManager fixDexManager = new FixDexManager(this);
 //        加载所有修复的dex包
             fixDexManager.loadFixDex();
