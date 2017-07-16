@@ -19,7 +19,8 @@ public class DaoSupportFactory {
     private DaoSupportFactory() {
 
 //        把数据放到内存卡中,判断是否有存储卡，6.0版本后要动态申请权限
-        File dbRoot = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "nhdz" + File.separator + "database");
+        File dbRoot = new File(Environment.getExternalStorageDirectory()
+                .getAbsolutePath() + File.separator + "nhdz" + File.separator + "database");
 
         if (!dbRoot.exists()) {
             dbRoot.mkdirs();

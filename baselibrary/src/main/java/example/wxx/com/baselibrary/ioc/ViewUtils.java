@@ -99,7 +99,7 @@ public class ViewUtils {
 
                     if (view != null) {
 //        4、View.setOnClickListener
-                        view.setOnClickListener(new DeclaredOnClickListener(method, object,isCheckNet));
+                        view.setOnClickListener(new DeclaredOnClickListener(method, object, isCheckNet));
                     }
                 }
             }
@@ -149,7 +149,7 @@ public class ViewUtils {
                     mMethod.invoke(mObject, null);
                 } catch (Exception e1) {
                     e1.printStackTrace();
-                    Log.e(TAG, "onClick: ",e );
+                    Log.e(TAG, "onClick: ", e);
                 }
             }
         }

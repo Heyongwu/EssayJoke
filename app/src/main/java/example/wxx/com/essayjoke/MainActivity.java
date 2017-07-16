@@ -2,6 +2,9 @@ package example.wxx.com.essayjoke;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -10,22 +13,36 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import example.wxx.com.baselibrary.dialog.AlertDialog;
 import example.wxx.com.baselibrary.exception.ExceptionCrashHandler;
 import example.wxx.com.baselibrary.fixbug.FixDexManager;
 import example.wxx.com.baselibrary.http.HttpUtils;
+import example.wxx.com.baselibrary.ioc.OnClick;
 import example.wxx.com.baselibrary.ioc.ViewById;
 import example.wxx.com.essayjoke.model.DiscoverListResult;
+import example.wxx.com.essayjoke.model.Person;
 import example.wxx.com.framelibrary.BaseSkinActivity;
 import example.wxx.com.framelibrary.DefaultNavigationBar;
+import example.wxx.com.framelibrary.banner.BannerAdapter;
+import example.wxx.com.framelibrary.banner.BannerView;
+import example.wxx.com.framelibrary.db.DaoSupportFactory;
+import example.wxx.com.framelibrary.db.IDaoSupport;
 import example.wxx.com.framelibrary.http.HttpCallback;
+import example.wxx.com.framelibrary.skin.SkinManager;
 
 public class MainActivity extends BaseSkinActivity implements View.OnClickListener {
     public static final int PERMISSION = 1;
@@ -34,6 +51,29 @@ public class MainActivity extends BaseSkinActivity implements View.OnClickListen
     /****测试****/
     @ViewById(R.id.btnTest)
     private Button mBtnTest;
+    /****换肤****/
+//    @ViewById(R.id.tvTestSkin)
+//    private Button mTvTestSkin;
+    /****Button****/
+    @ViewById(R.id.button)
+    private Button mButton;
+    //    @ViewById(R.id.rl)
+//    private LinearLayout mRl;
+    @ViewById(R.id.ivSkin)
+    private ImageView mIvSkin;
+    /****换肤****/
+    @ViewById(R.id.btnSkin)
+    private Button mBtnSkin;
+    /****默认****/
+    @ViewById(R.id.btnDefault)
+    private Button mBtnDefault;
+    /****跳转****/
+    @ViewById(R.id.btnGoTo)
+    private Button mBtnGoTo;
+    @ViewById(R.id.activity_main)
+    private LinearLayout mActivityMain;
+    @ViewById(R.id.BV)
+    private BannerView mBannerView;
 
     @Override
     protected void setContentView() {
@@ -65,7 +105,7 @@ public class MainActivity extends BaseSkinActivity implements View.OnClickListen
 
     @Override
     protected void initView() {
-
+        initBanner();
     }
 
     @Override
@@ -94,14 +134,14 @@ public class MainActivity extends BaseSkinActivity implements View.OnClickListen
 
 //        3、就是为了高扩展
 
-        /*IDaoSupport<Person> daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
+        IDaoSupport<Person> daoSupport = DaoSupportFactory.getFactory().getDao(Person.class);
 //        daoSupport.insert(new Person("Xander",23));
 
-        daoSupport.delete(null,null);
+        daoSupport.delete(null, new String[]{});
         List<Person> persons = new ArrayList<>();
         long start = System.currentTimeMillis();
         for (int i = 0; i < 10; i++) {
-            persons.add(new Person("Xander",23+i));
+            persons.add(new Person("Xander", 23 + i));
         }
 
         daoSupport.insertList(persons);
@@ -111,7 +151,7 @@ public class MainActivity extends BaseSkinActivity implements View.OnClickListen
         List<Person> personList = daoSupport.querySupport().columns("age").selection("age>?").selectionArgs("26").query();
         for (Person person : personList) {
             Log.e(TAG, person.toString());
-        }*/
+        }
 //        upLoadCrashLog();//
 
 
@@ -249,5 +289,105 @@ public class MainActivity extends BaseSkinActivity implements View.OnClickListen
             }
         });
 
+    }
+
+    /**
+     * 换肤
+     *
+     * @param tvTestSkin
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+//    @OnClick(R.id.tvTestSkin)
+    private void tvTestSkinClick(Button tvTestSkin) throws IllegalAccessException, InstantiationException {
+        //        读取本地的一个  skin里面的资源
+        try {
+            Resources superRes = getResources();
+//        创建AssetManager
+            AssetManager asset = AssetManager.class.newInstance();
+
+            final Method method = AssetManager.class.getDeclaredMethod("addAssetPath", String.class);
+//            method.setAccessible(true);//如果是私有的
+//            反射执行方法
+            method.invoke(asset, Environment.getExternalStorageDirectory().getAbsolutePath()
+                    + File.separator + "skin.skin");
+
+            Resources resources = new Resources(asset, superRes.getDisplayMetrics(), superRes.getConfiguration());
+//            获取资源
+            int drawableId = resources.getIdentifier("image_src", "drawable", "example.wxx.com.skin");
+            final Drawable drawable = resources.getDrawable(drawableId);
+            mIvSkin.setImageDrawable(drawable);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @OnClick(R.id.btnSkin)
+    private void btnSkinClick(Button btnSkin) {
+        String skinPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "red.skin";
+//        换肤
+        int result = SkinManager.getInstance().loadSkin(skinPath);
+
+    }
+
+    @OnClick(R.id.btnDefault)
+    private void btnDefaultClick(Button btnDefault) {
+//        回复默认
+        int result = SkinManager.getInstance().restoreDefault();
+
+    }
+
+    @OnClick(R.id.btnGoTo)
+    private void btnGoToClick(Button btnGoTo) {
+//        跳转
+        startActivity(MainActivity.class);
+
+    }
+
+
+    private void initBanner() {
+        final List<String> imagePaths = new ArrayList<>();
+        imagePaths.add("http://img3.redocn.com/tupian/20150430/mantenghuawenmodianshiliangbeijing_3924704.jpg");
+        imagePaths.add("http://pic6.huitu.com/res/20130116/84481_20130116142820494200_1.jpg");
+        imagePaths.add("http://pic.58pic.com/58pic/13/85/85/73T58PIC9aj_1024.jpg");
+
+        final List<String> descs = new ArrayList<>();
+        descs.add("描述1");
+        descs.add("描述2");
+        descs.add("描述3");
+
+        mBannerView.setAdapter(new BannerAdapter() {
+            @Override
+            public View getView(int position, View convertView) {
+                ImageView bannerIv = null;
+                if (convertView==null) {
+                    bannerIv = new ImageView(MainActivity.this);
+                    bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
+                }else{
+                   bannerIv = (ImageView) convertView;
+                }
+                String imagePath = "";
+                if (position < imagePaths.size())
+                    imagePath = imagePaths.get(position);
+
+//                利用第三方工具加载图片 Glide
+                Glide.with(MainActivity.this).load(imagePath)
+                        .placeholder(R.mipmap.ic_launcher_round).into(bannerIv);
+                return bannerIv;
+            }
+
+            @Override
+            public int getCount() {
+                return imagePaths.size();
+            }
+
+            @Override
+            public String getBannerDesc(int position) {
+                return descs.get(position);
+            }
+        });
+//      开始滚动
+        mBannerView.startRoll();
     }
 }

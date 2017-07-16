@@ -30,4 +30,6 @@ dependencies {
     compile project(':baselibrary')
     compile project(':framelibrary')
     compile 'com.alipay.euler:andfix:0.5.0@aar'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

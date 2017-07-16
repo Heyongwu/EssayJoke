@@ -1,18 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    android:id="@+id/rl"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_bg_color"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context="example.wxx.com.essayjoke.MainActivity">
+
+    <example.wxx.com.framelibrary.banner.BannerView
+        android:id="@+id/BV"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        app:dotSize="8dp"
+        app:dotDistance="10dp"
+        app:dotGravity="right"
+        app:bottomColor="@color/banner_bottom_bar_bg_day"
+        app:dotIndicatorFocus="@color/dot_select_color"
+        app:dotIndicatorNormal="@color/dot_unselect_color"
+        app:widthProportion="8"
+        app:heightProportion="3"
+        >
+
+    </example.wxx.com.framelibrary.banner.BannerView>
+
+
+    <Button
+        android:id="@+id/btnSkin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="换肤"
+        android:textColor="@color/main_bg_color"
+        />
+
+    <Button
+        android:id="@+id/btnDefault"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="默认"
+        android:textColor="@color/main_bg_color"
+        />
+
+    <Button
+        android:id="@+id/btnGoTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="跳转"
+        android:textColor="@color/main_bg_color"
+        />
+
+
+    <ImageView
+        android:id="@+id/ivSkin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:src="@mipmap/main_bg"
+        />
 
     <Button
         android:id="@+id/btnTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="测试"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -23,7 +82,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
+        android:visibility="gone"
         />
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
