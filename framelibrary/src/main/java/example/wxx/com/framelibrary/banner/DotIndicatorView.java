@@ -18,15 +18,15 @@ import android.view.View;
  * 时间：2017/7/12 0012 21:10
  */
 
-public class DotIndicatorView extends View{
+public class DotIndicatorView extends View {
     private Drawable mDrawable;
 
     public DotIndicatorView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public DotIndicatorView(Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public DotIndicatorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -35,7 +35,7 @@ public class DotIndicatorView extends View{
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if(mDrawable!=null) {
+        if (mDrawable != null) {
 //            mDrawable.setBounds(0, 0, getMeasuredWidth(), getMeasuredHeight());
 //            mDrawable.draw(canvas);
 //            画圆
@@ -44,12 +44,13 @@ public class DotIndicatorView extends View{
             Bitmap circleBitmap = getCircleBitmap(bitmap);
 
 //            把圆形的Bitmap绘制到画布上
-            canvas.drawBitmap(circleBitmap,0,0,null);
+            canvas.drawBitmap(circleBitmap, 0, 0, null);
         }
     }
 
     /**
      * 获取圆形Bitmap
+     *
      * @param bitmap
      * @return
      */
@@ -65,22 +66,26 @@ public class DotIndicatorView extends View{
 //        设置防抖动
         paint.setDither(true);
 //        在画布上画个圆、
-        canvas.drawCircle(getMeasuredWidth()/2,getMeasuredHeight()/2,getMeasuredWidth()/2,paint);
+        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() / 2, getMeasuredWidth() / 2, paint);
 //        取圆和Bitmap的交集
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
 //        把原来的Bitmap绘制到新的圆上面
-        canvas.drawBitmap(bitmap,0,0,paint);
+        canvas.drawBitmap(bitmap, 0, 0, paint);
+//        内存优化，回收bitmap
+        bitmap.recycle();
+        bitmap = null;
         return circleBitmap;
     }
 
     /**
      * 从drawable中得到Bitmap
+     *
      * @param drawable
      * @return
      */
     private Bitmap drawableToBitmap(Drawable drawable) {
 //        如果是BitmapDrawable类型
-        if(drawable instanceof BitmapDrawable)
+        if (drawable instanceof BitmapDrawable)
             return ((BitmapDrawable) drawable).getBitmap();
 
 //        其他类型 比如ColorDrawable
@@ -90,13 +95,14 @@ public class DotIndicatorView extends View{
         final Canvas canvas = new Canvas(outBitmap);
 
 //        把drawable 画到 Bitmap上
-        drawable.setBounds(0,0,getMeasuredWidth(),getMeasuredHeight());
+        drawable.setBounds(0, 0, getMeasuredWidth(), getMeasuredHeight());
         drawable.draw(canvas);
         return outBitmap;
     }
 
     /**
      * 设置Drawable
+     *
      * @param drawable
      */
     public void setDrawable(Drawable drawable) {

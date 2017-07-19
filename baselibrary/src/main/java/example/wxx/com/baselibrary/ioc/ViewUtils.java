@@ -146,7 +146,7 @@ public class ViewUtils {
             } catch (Exception e) {
                 e.printStackTrace();
                 try {
-                    mMethod.invoke(mObject, null);
+                    mMethod.invoke(mObject, new Object[]{});
                 } catch (Exception e1) {
                     e1.printStackTrace();
                     Log.e(TAG, "onClick: ", e);
