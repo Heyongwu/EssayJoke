@@ -11,22 +11,21 @@ import java.io.File;
 import java.io.IOException;
 
 import example.wxx.com.baselibrary.exception.ExceptionCrashHandler;
-import example.wxx.com.baselibrary.ioc.ViewById;
 import example.wxx.com.framelibrary.BaseSkinActivity;
 
 public class TestActivity extends BaseSkinActivity implements View.OnClickListener{
     public static final int PERMISSION = 1;
 
     private static final String TAG = "MainActivity";
-    /****测试****/
-    @ViewById(R.id.btnTest)
-    private Button mBtnTest;
+//    /****测试****/
+//    @ViewById(R.id.btnTest)
+//    private Button mBtnTest;
 
     @Override
     protected void setContentView() {
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_test);
         Button btnTest = viewById(R.id.btnTest);
-        btnTest.setOnClickListener(this);
+//        btnTest.setOnClickListener(this);
 
     }
 
