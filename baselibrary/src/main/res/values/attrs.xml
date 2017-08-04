@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NCalendar">
+        <attr name="solarTextColor" format="color"/>
+        <attr name="lunarTextColor" format="color"/>
+        <attr name="hintColor" format="color"/>
+        <attr name="selectCircleColor" format="color"/>
+        <attr name="solarTextSize" format="dimension"/>
+        <attr name="lunarTextSize" format="dimension"/>
+        <attr name="selectCircleRadius" format="integer"/>
+        <attr name="isShowLunar" format="boolean"/>
+
+        <attr name="pointSize" format="dimension"/>
+        <attr name="pointcolor" format="color"/>
+        <attr name="hollowCircleColor" format="color"/>
+        <attr name="hollowCircleStroke" format="integer"/>
+        <attr name="startDateTime" format="string"/>
+        <attr name="endDateTime" format="string"/>
+
+        <attr name="calendarHeight" format="dimension"/>
+        <attr name="isMultiple" format="boolean"/>
+        <attr name="duration" format="integer"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="SlidingMenu">
+        <attr name="rightPadding" format="dimension"/>
+    </declare-styleable>
+</resources>

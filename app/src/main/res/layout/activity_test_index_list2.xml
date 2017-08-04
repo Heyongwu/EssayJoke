@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="example.wxx.com.essayjoke.test.TestIndexList2Activity">
+
+    <example.wxx.com.essayjoke.ui.LeaguerRecylerView
+        android:id="@+id/indexRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </example.wxx.com.essayjoke.ui.LeaguerRecylerView>
+</android.support.constraint.ConstraintLayout>

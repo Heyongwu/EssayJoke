@@ -14,4 +14,7 @@
 
     <color name="main_bg_color">#2F2FFF</color>
     <color name="main_text_color">#FFFFFF</color>
+
+    <color name="partTranslucent">#39000000</color>
+
 </resources>

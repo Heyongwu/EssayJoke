@@ -30,4 +30,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.3.1'
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'joda-time:joda-time:2.9.9'
 }

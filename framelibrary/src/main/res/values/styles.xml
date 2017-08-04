@@ -37,4 +37,12 @@
         <item name="android:text">@null</item>
         <item name="android:drawableLeft">@null</item>
     </style>
+
+    <!--仿微信通信录列表-->
+    <attr name="indexBarTextSize" format="dimension" />
+
+    <declare-styleable name="IndexBar">
+        <attr name="indexBarTextSize" />
+        <attr name="indexBarPressBackground" format="color" />
+    </declare-styleable>
 </resources>

@@ -30,4 +30,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':baselibrary')
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.github.promeg:tinypinyin:1.0.0' // ~80KB
+
 }

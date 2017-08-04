@@ -1,4 +1,4 @@
-package example.wxx.com.essayjoke;
+package example.wxx.com.essayjoke.test;
 
 import android.content.pm.PackageManager;
 import android.os.Environment;
@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 
 import example.wxx.com.baselibrary.exception.ExceptionCrashHandler;
+import example.wxx.com.essayjoke.BaseApplication;
+import example.wxx.com.essayjoke.R;
 import example.wxx.com.framelibrary.BaseSkinActivity;
 
 public class TestActivity extends BaseSkinActivity implements View.OnClickListener{

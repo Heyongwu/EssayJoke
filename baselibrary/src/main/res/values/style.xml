@@ -28,5 +28,4 @@
         <item name="android:windowEnterAnimation">@anim/dialog_scale_anim_in</item>
         <item name="android:windowExitAnimation">@anim/dialog_scale_anim_out</item>
     </style>
-
 </resources>
