@@ -2,8 +2,10 @@
 <example.wxx.com.baselibrary.slidingMenu.SlidingMenu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/slidignMenu"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     app:rightPadding="70dp"
     >

@@ -11,8 +11,10 @@ import java.io.File;
 import java.io.IOException;
 
 import example.wxx.com.baselibrary.exception.ExceptionCrashHandler;
+import example.wxx.com.baselibrary.slidingMenu.SlidingMenu;
 import example.wxx.com.essayjoke.BaseApplication;
 import example.wxx.com.essayjoke.R;
+import example.wxx.com.essayjoke.ui.CircleImageView;
 import example.wxx.com.framelibrary.BaseSkinActivity;
 
 public class TestActivity extends BaseSkinActivity implements View.OnClickListener{
@@ -23,12 +25,23 @@ public class TestActivity extends BaseSkinActivity implements View.OnClickListen
 //    @ViewById(R.id.btnTest)
 //    private Button mBtnTest;
 
+    private CircleImageView mCivIcon;
+    private SlidingMenu mSlidingMenu;
+
     @Override
     protected void setContentView() {
         setContentView(R.layout.activity_test);
         Button btnTest = viewById(R.id.btnTest);
 //        btnTest.setOnClickListener(this);
-
+        mSlidingMenu = (SlidingMenu) findViewById(R.id.slidignMenu);
+        mCivIcon= (CircleImageView) findViewById(R.id.civIcon);
+        mCivIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSlidingMenu.toggleMenu();
+                Toast.makeText(TestActivity.this, "切换菜单", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
